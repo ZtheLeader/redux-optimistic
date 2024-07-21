@@ -1,18 +1,16 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { listSlice } from './articleSlice'
+import { setupListeners } from '@reduxjs/toolkit/query'
 
 
-
-const store = configureStore({
-  reducer: counterSlice.reducer
+const rootReducer = combineReducers({
+  [listSlice.reducerPath]: listSlice.reducer,
 })
 
-// Can still subscribe to the store
-store.subscribe(() => console.log(store.getState()))
+export const store = configureStore({
+  reducer: rootReducer
+})
 
-// Still pass action objects to `dispatch`, but they're created for us
-store.dispatch(incremented())
-// {value: 1}
-store.dispatch(incremented())
-// {value: 2}
-store.dispatch(decremented())
-// {value: 1}
+export type RootState = ReturnType<typeof rootReducer>
+export type AppDispatch = typeof store.dispatch
+setupListeners(store.dispatch)

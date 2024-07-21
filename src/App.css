@@ -1,42 +1,108 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 800px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
 .card {
   padding: 2em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* background-color: #f9f9f9; */
+  width: 70rem;
 }
 
-.read-the-docs {
-  color: #888;
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
+}
+
+.input {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+  margin-right: 1em;
+  font-size: 1em;
+}
+
+.btn {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: white;
+  margin-right: 0.5em;
+}
+
+.btn-update {
+  background-color: #007bff;
+  color: white;
+  margin-right: 0.5em;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: white;
+  margin-right: 0.5em;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  margin-right: 0.5em;
+}
+
+.btn:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.article-list {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.article-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* background-color: #fff; */
+}
+
+.article-title {
+  text-align: left;
+  flex: 1;
+  margin-right: 1em;
+}
+
+.article-actions {
+  display: flex;
+  gap: 0.5em;
+}
+
+code {
+  /* background-color: #f1f1f1; */
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
 }

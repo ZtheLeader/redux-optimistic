@@ -7,14 +7,13 @@ import { addArticle, deleteArticle, updateArticle, addArticlesAtIndex } from './
 import { TypeArticle } from './types'
 import { fakeApiFailure, fakeApiMethod } from './api'
 import { findCurrentArticleAndIndexFromState } from './utils'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify'
 
 function App() {
   const { articles } = useAppSelector(state => state.articleSlice)
   const dispatch = useAppDispatch()
 
-  const [newArticleTitle, setNewArticleTitle] = useState('')
+  const [newArticleTitle, setNewArticleTitle] = useState('Article Title')
   const [isLoading, setIsLoading] = useState(false)
   const [editingArticleId, setEditingArticleId] = useState<number | string | null>(null)
   const [editingArticleTitle, setEditingArticleTitle] = useState('')
@@ -27,7 +26,7 @@ function App() {
     fakeApiMethod().then(() => {
       const article: TypeArticle = { title: newArticleTitle, id: `server-generated-id-${uuidv4()}` }
       dispatch(addArticle(article))
-      
+
       setNewArticleTitle('')
       toast.success('Article added successfully!')
     }).finally(() => {
@@ -57,7 +56,7 @@ function App() {
     fakeApiMethod().then(() => {
       const fakeArticleFromResponse: TypeArticle = { title: newTitle, id: `server-generated-id-${articleId}` }
       dispatch(updateArticle({ id: articleId, article: fakeArticleFromResponse }))
-      
+
       setEditingArticleId(null)
       setEditingArticleTitle('')
       toast.success('Article updated successfully!')
@@ -142,20 +141,12 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
       <h1>Articles {isLoading ? '(API call being made...)' : ''}</h1>
       <div className="card">
-        <div className="row">
-          <input
-            type="text"
-            value={newArticleTitle}
-            onChange={(e) => setNewArticleTitle(e.target.value)}
-            placeholder="Enter article title"
-            className="input"
-            autoFocus
-          />
-          <button onClick={handleAddArticle} disabled={!newArticleTitle} className="btn btn-add">Add Article</button>
-          <button onClick={handleAddArticleOptimistically} disabled={!newArticleTitle} className="btn btn-add">Add Article (Optimistically)</button>
+        <div className="column-headers">
+          <span className="column-header">Article Title</span>
+          <span className="column-header">Article ID</span>
+          <span className="column-header">Action Buttons</span>
         </div>
         <div className="article-list">
           {articles.map((article) => (
@@ -223,6 +214,21 @@ function App() {
             </div>
           ))}
         </div>
+
+        
+        <div className="row">
+          <input
+            type="text"
+            value={newArticleTitle}
+            onChange={(e) => setNewArticleTitle(e.target.value)}
+            placeholder="Enter article title"
+            className="input"
+            autoFocus
+          />
+          <button onClick={handleAddArticle} disabled={!newArticleTitle} className="btn btn-add">Add Article</button>
+          <button onClick={handleAddArticleOptimistically} disabled={!newArticleTitle} className="btn btn-add">Add Article (Optimistically)</button>
+        </div>
+
       </div>
     </>
   )

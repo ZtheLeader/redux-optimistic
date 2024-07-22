@@ -69,6 +69,7 @@ function App() {
   const handleAddArticleOptimistically = () => {
     setIsLoading(true)
 
+    // Optimistic Update:
     const dummyId = uuidv4();
     const article: TypeArticle = { title: newArticleTitle, id: dummyId }
     dispatch(addArticle(article))
@@ -77,8 +78,11 @@ function App() {
     toast.success('Article added successfully!')
 
     fakeApiMethod().then(() => {
-      dispatch(updateArticle({ id: dummyId, article: { title: newArticleTitle, id: `server-generated-id-${dummyId}` } }))
+      // Update with server based response
+      const responseArticle: TypeArticle = { title: newArticleTitle, id: `server-generated-id-${dummyId}` }
+      dispatch(updateArticle({ id: dummyId, article: responseArticle }))
     }).catch(() => {
+      // Revert on failure
       dispatch(deleteArticle(dummyId))
       toast.error('Failed to add article.')
     }).finally(() => {
@@ -215,7 +219,7 @@ function App() {
           ))}
         </div>
 
-        
+
         <div className="row">
           <input
             type="text"

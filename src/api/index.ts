@@ -1,4 +1,4 @@
-export function fakeApiMethod(): Promise<any> {
+export function fakeApiMethod(): Promise<string> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve('Response data');
@@ -6,8 +6,8 @@ export function fakeApiMethod(): Promise<any> {
   });
 }
 
-export function fakeApiFailure(): Promise<any> {
-  return new Promise((resolve, reject) => {
+export function fakeApiFailure(): Promise<never> {
+  return new Promise((_, reject) => {
     setTimeout(() => {
       reject('Error occurred');
     }, 3000);

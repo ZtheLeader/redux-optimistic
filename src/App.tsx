@@ -145,7 +145,7 @@ function App() {
 
   return (
     <>
-      <h1>Articles {isLoading ? '(API call being made...)' : ''}</h1>
+      <h1 className="page-title">Articles {isLoading ? '(API call being made...)' : ''}</h1>
       <div className="card">
         <div className="column-headers">
           <span className="column-header">Article Title</span>

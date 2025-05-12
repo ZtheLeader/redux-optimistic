@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAppDispatch } from '../hooks/redux/useAppDispatch'
-import { addArticle } from '../store/articleSlice'
+import { addArticle, updateArticle, deleteArticle } from '../store/articleSlice'
 import { v4 as uuidv4 } from 'uuid'
 import { fakeApiMethod } from '../api'
 import { toast } from 'react-toastify'
@@ -27,7 +27,6 @@ const AddArticle = () => {
 
   const handleAddArticleOptimistically = () => {
     setIsLoading(true)
-
     const dummyId = uuidv4();
     const article = { title: newArticleTitle, id: dummyId }
     dispatch(addArticle(article))
@@ -55,11 +54,20 @@ const AddArticle = () => {
         placeholder="Enter article title"
         className="input"
         autoFocus
+        disabled={isLoading}
       />
-      <button onClick={handleAddArticle} disabled={!newArticleTitle} className="btn btn-add">
+      <button
+        onClick={handleAddArticle}
+        disabled={!newArticleTitle || isLoading}
+        className="btn btn-add"
+      >
         Add Article
       </button>
-      <button onClick={handleAddArticleOptimistically} disabled={!newArticleTitle} className="btn btn-add">
+      <button
+        onClick={handleAddArticleOptimistically}
+        disabled={!newArticleTitle || isLoading}
+        className="btn btn-add"
+      >
         Add Article (Optimistically)
       </button>
     </div>

@@ -3,6 +3,7 @@ import { useAppSelector } from './hooks/redux/useAppSelector'
 import GitHubLink from './components/GitHubLink'
 import ArticleList from './components/ArticleList'
 import AddArticle from './components/AddArticle'
+import UpdateGuide from './components/UpdateGuide'
 
 function App() {
   const { articles } = useAppSelector(state => state.articleSlice)
@@ -19,6 +20,7 @@ function App() {
         </div>
         <ArticleList articles={articles} />
         <AddArticle />
+        <UpdateGuide />
       </div>
     </>
   )
